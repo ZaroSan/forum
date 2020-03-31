@@ -45,6 +45,12 @@ class Controller {
 		}
 		
 	}
+	public function e404($message){
+		header("HTTP/1.0 404 Not Found");
+		$this->set('message',$message);
+		$this->render('/errors/404');
+		die();
+	}
 	
 }
 ?>
