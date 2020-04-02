@@ -10,12 +10,23 @@ class PageController extends Controller{
 
 	function view($id){
 		$this->loadModel('Post');
-		$post=$this->Post->findFirst(array(
+		$d['page']=$this->Post->findFirst(array(
 			'conditions'=> array(
-				'id'=>$id)));
-		if(empty($post)){
+				'id'=>$id,
+				'type'=>'page',
+				'online'=>1)));
+		if(empty($d['page'])){
 			$this->e404('Page introuvable');
 		}
-		$this->set('post',$post);
+		/*$d['pages'] = $this->Post->find(array(
+			'conditions' => array('type'=>'page')));*/
+
+		$this->set($d);
+	}
+
+	function getMenu(){
+		$this->loadModel('Post');
+		return $this->Post->find(array(
+			'conditions' => array('type'=>'page', 'online'=>1)));
 	}
 }

@@ -3,6 +3,10 @@
  * 
  */
 class Router {
+
+	static $routes=array();
+
+
 	static function parse($url,$request){
 		$url=trim($url,'/');
 		$params=explode('/', $url);
@@ -13,6 +17,12 @@ class Router {
 
 		return true;
 
+	}
+	static function connect($redirection,$url){
+
+	}
+	static function url($url){
+		return $url;
 	}
 }
 ?>

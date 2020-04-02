@@ -7,9 +7,10 @@ class Controller {
 	private $vars=array();
 	public $layout='default';
 	private $rendered = false;
-	function __construct($request){
-		$this->request=$request;
-
+	function __construct($request = null){
+		if($request){
+			$this->request=$request;
+		}
 	}
 
 	public function render($view){
@@ -50,6 +51,12 @@ class Controller {
 		$this->set('message',$message);
 		$this->render('/errors/404');
 		die();
+	}
+	public function request($controller ,$action){
+		$controller .= 'Controller';
+		require_once ROOT.DS.'controller'.DS.$controller.'.php';
+		$c =new $controller();
+		return $c->$action();
 	}
 	
 }
