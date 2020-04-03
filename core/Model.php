@@ -6,6 +6,7 @@ class Model{
 	public $table= false;
 	public $db;
 	public $primaryKey ='id';
+	public $id;
 
 	function __construct(){
 		if($this->table === false){
@@ -86,6 +87,44 @@ class Model{
 		));
 		return $res->count;
 		
+	}
+	public function delete($id){
+		$sql="DELETE FROM {$this->table} WHERE {$this->primaryKey} = {$id}";
+		$this->db->query($sql);
+	}
+	public function save($data){
+		$key=$this->primaryKey;
+		$fields=array();
+		$d=array();
+		if(isset($data->$key))unset($data->$key);
+		foreach ($data as $k => $value) {
+			# code...
+			$fields[]= "$k=:$k";
+			$d[":$k"]=$value;
+		}
+		
+		if(isset($data->$key) && !empty($data->$key)){
+			
+			$sql='UPDATE '.$this->table.' SET '.implode(',', $fields).' WHERE '.$key.'=:'.$key;
+			$this->id=$data->$key;
+			$action='update';
+		}
+		else{
+
+			$sql='INSERT INTO '.$this->table.' SET '.implode(',', $fields);
+			$action='insert';
+		}
+		
+		$pre=$this->db->prepare($sql);
+		$pre->execute($d);
+		if($action=='insert'){
+			$this->id=$this->db->lastInsertId();
+		}
+		return true;
+		
+
+
+
 	}
 }
 ?>

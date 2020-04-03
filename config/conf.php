@@ -13,6 +13,8 @@ class Conf{
 
 
 }
-
-Router::connect('post/:slug-:id','post/view/id:([0-9]+)/slug:([a-z0-9\-]+)')
+Router::prefix('cockpit','admin');
+Router::connect('/','post/index');
+Router::connect('post/:slug-:id','post/view/id:([0-9]+)/slug:([a-z0-9\-]+)');
+Router::connect('blog/:action','post/:action');
 ?>

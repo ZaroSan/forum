@@ -7,10 +7,12 @@ class Controller {
 	private $vars=array();
 	public $layout='default';
 	private $rendered = false;
+
 	function __construct($request = null){
 		if($request){
 			$this->request=$request;
 		}
+		require ROOT.DS.'config'.DS.'hook.php';
 	}
 
 	public function render($view){
@@ -57,6 +59,13 @@ class Controller {
 		require_once ROOT.DS.'controller'.DS.$controller.'.php';
 		$c =new $controller();
 		return $c->$action();
+	}
+
+	public function redirect($url,$code=null){
+		if($code==301){
+			header("HTTP/1.0 301 Moved Permanently");
+		}
+		header("Location: ".Router::url($url));
 	}
 	
 }
