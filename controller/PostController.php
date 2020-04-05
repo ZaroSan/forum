@@ -30,7 +30,7 @@ class PostController extends Controller{
 				'online'=>1);
 
 		$d['page']=$this->Post->findFirst(array(
-			'fields'=> 'id,slug,content,name',
+				'fields'=> 'id,slug,content,name',
 			'conditions'=> $conditions));
 		if(empty($d['page'])){
 			$this->e404('Page introuvable');
@@ -60,21 +60,34 @@ class PostController extends Controller{
 
 	function admin_delete($id){
 		$this->loadModel('Post');
-		//$this->Post->delete($id);
-		$this->Session->setFlash('le contenu a bien été supprimer','success');
+		$this->Post->delete($id);
+		
 		$this->redirect('admin/post/index');
 	}
 	function admin_edit($id=null){
 		$this->loadModel('Post');
 		$d['id']='';
 		if($this->request->data){
-			$this->Post->save($this->request->data);
-			$id=$this->Post->id;
+			if($this->Post->validates($this->request->data)){
+				$this->request->data->type='post';
+				$this->request->data->created=date('Y-m-d h:i:s');
+				$this->Post->save($this->request->data);
+				$this->Session->setFlash('le contenu a bien été modifié','success');
+				$id=$this->Post->id;
+				$this->redirect('admin/post/index');
+			}
+			else{
+				$this->Session->setFlash('Informations invalides','danger');
+			}
+			
 		}
-		if($id){
-			$this->request->data=$this->Post->findFirst(array('conditions'=> array('id'=>$id)));
-			$d['id']=$id;
+		else{
+			if($id){
+				$this->request->data=$this->Post->findFirst(array('conditions'=> array('id'=>$id)));
+				$d['id']=$id;
+			}
 		}
+		
 		$this->set($d);
 		
 		

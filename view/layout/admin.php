@@ -8,13 +8,16 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
     <title><?php echo isset($title_for_layout)? $title_for_layout: ' Admin '; ?></title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      
-     
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" href="<?php echo Router::url('admin/post/index'); ?>">Administration <span class="sr-only">(current)</span></a>
@@ -24,6 +27,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo Router::url('admin/page/index');?>">Pages</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="<?php echo Router::url('/');?>">Voir le site</a>
           </li>
       </div>
     </nav>

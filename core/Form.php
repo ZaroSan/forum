@@ -1,10 +1,17 @@
 <?php
 class Form{
 	public $controller;
+	public $errors;
 	public function __construct($controller){
 		$this->controller=$controller;
 	}
 	public function input($name,$label,$options=array()){
+		$error=false;
+		$classError='';
+		if(isset($this->errors[$name])){
+			$error=$this->errors[$name];
+		}
+		//debug($this->errors);
 		if(!isset($this->controller->request->data->$name)){
 			$value='';
 		}
@@ -32,7 +39,9 @@ class Form{
 		elseif($options['type']=='checkbox'){
 			$html.='<input type="hidden" name="'.$name.'" value="0"><input type="checkbox" name="'.$name.'" value="1"'.(empty($value)?'':'checked').'/>';
 		}
-
+		if($error){
+			$html.= '<span class="help-inline">'.$error.'</span>';
+		}
 
 		$html.='</div></div>';
 		return $html;

@@ -7,6 +7,8 @@ class Model{
 	public $db;
 	public $primaryKey ='id';
 	public $id;
+	public $errors=array();
+	public $form;
 
 	function __construct(){
 		if($this->table === false){
@@ -96,11 +98,17 @@ class Model{
 		$key=$this->primaryKey;
 		$fields=array();
 		$d=array();
-		if(isset($data->$key))unset($data->$key);
+		
 		foreach ($data as $k => $value) {
 			# code...
-			$fields[]= "$k=:$k";
-			$d[":$k"]=$value;
+			
+			if($k!=$this->primaryKey){
+				$fields[]= "$k=:$k";
+				$d[":$k"]=$value;
+			}
+			elseif(!empty($value)){
+				$d[":$k"]=$value;
+			}
 		}
 		
 		if(isset($data->$key) && !empty($data->$key)){
@@ -121,10 +129,33 @@ class Model{
 			$this->id=$this->db->lastInsertId();
 		}
 		return true;
+	}
+	public function validates($data){
+		$errors=array();
 		
-
-
-
+		foreach ($this->validate as $key => $value) {
+			if(!isset($data->$key)){
+				$errors[$key]=$value['message'];
+			}
+			else{
+				if($value['rule']=='notEmpty'){
+					if(empty($data->$key)){
+						$errors[$key]=$value['message'];
+					}
+				}
+				elseif(!preg_match('/^'.$value['rule'].'$/', $data->$key)){
+					$errors[$key]=$value['message'];
+				}
+			}
+		}
+		$this->errors=$errors;
+		if(isset($this->Form)){
+			$this->Form->errors=$errors;
+		}
+		if(empty($errors)){
+			return true;
+		}
+		return false;
 	}
 }
 ?>
