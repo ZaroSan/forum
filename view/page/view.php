@@ -1,3 +1,34 @@
-<?php $title_for_layout = $page->name; ?>
-<h1><?php echo $page->name;?></h1>
-<p><?php echo $page->content;?></p>
+<?php $title_for_layout = $page->content; ?>
+
+<div class="mt-5 alert alert-dark">
+	<h3 class="alert-heading">Les actualités sur les <?php echo $page->name;?></h3>
+	<p><?php echo $page->content;?></p>
+</div>
+<hr>
+<div class="d-flex align-content-start flex-wrap">
+	<?php foreach ($posts as $key => $value): ?>
+		<div class="col mb-4">
+			<div class="card border-dark h-100" style="max-width: 18rem;" title="Created <?php echo $value->created;?>">
+				<div class="card-header">
+					<h5 class="card-title"><?php echo $value->name;?></h5>
+				</div>
+				<div class="card-body text-dark">
+					<p class="card-text"><?php echo $value->content;?></p>
+				</div>
+				<div class="card-footer">
+					<a class="btn btn-outline-dark btn-sm float-right" href="<?php echo Router::url("post/view/id:{$value->id}/slug:{$value->slug}"); ?>">Lire la suite &rarr;</a>
+			     
+			    </div>
+			</div>
+		</div>
+	<?php endforeach ?>
+</div>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+  	<?php for($i=1; $i<=$pages;$i++): ?>
+    <li class="page-item  <?php if($i==$this->request->page) echo 'active'; ?>"><a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+    <?php endfor; ?>    
+  </ul>
+</nav>
+

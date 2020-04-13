@@ -39,6 +39,12 @@ class Form{
 		elseif($options['type']=='checkbox'){
 			$html.='<input type="hidden" name="'.$name.'" value="0"><input type="checkbox" name="'.$name.'" value="1"'.(empty($value)?'':'checked').'/>';
 		}
+		elseif($options['type']=='number'){
+			$html.='<input '.$attr.' type="number" name="'.$name.'"  id="input"'.$name.'" value="'.$value.'">';
+		}
+		elseif($options['type']=='date'){
+			$html.='<input '.$attr.' type="date" name="'.$name.'"  id="input"'.$name.'" value="'.$value.'">';
+		}
 		if($error){
 			$html.= '<span class="help-inline">'.$error.'</span>';
 		}

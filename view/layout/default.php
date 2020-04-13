@@ -13,24 +13,23 @@
     <title><?php echo isset($title_for_layout)? $title_for_layout: ' Mon site '; ?></title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="<?php echo Router::url('post/index');?>">Mon site <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="<?php echo Router::url('post/index');?>">Actualités <span class="sr-only">(current)</span></a>
             </li>
             <?php $pageMenu =$this->request('Page','getMenu'); ?>
             <?php foreach ($pageMenu as $p): ?>
               <li class="nav-item">
-                <a class="nav-link" href="<?php echo BASE_URL.'/page/view/'.$p->id ?>" title="<?php echo $p->name ?>"><?php echo $p->name ?></a>
+                <a class="nav-link" href="<?php echo Router::url("page/view/id:{$p->id}/slug:{$p->slug}"); ?>" title="<?php echo $p->name ?>"><?php echo $p->name ?></a>
+
               </li>
             <?php endforeach; ?>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo Router::url('post/index');?>">Actualité</a>
-            </li>
+            
           </ul>
         </div>
       

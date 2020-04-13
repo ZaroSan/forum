@@ -10,11 +10,12 @@ class Conf{
 			'password'=>'password'
 		)
 	);
-
+	static $admin='cockpit';
 
 }
-Router::prefix('cockpit','admin');
+Router::prefix(Conf::$admin,'admin');
 Router::connect('/','post/index');
 Router::connect('post/:slug-:id','post/view/id:([0-9]+)/slug:([a-z0-9\-]+)');
+Router::connect('page/:slug-:id','page/view/id:([0-9]+)/slug:([a-z0-9\-]+)');
 Router::connect('blog/:action','post/:action');
 ?>

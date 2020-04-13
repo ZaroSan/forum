@@ -23,7 +23,14 @@ class Dispatcher{
 	function loadController(){
 		$name=ucfirst($this->request->controller).'Controller';
 		$file= ROOT.DS.'controller'.DS.$name.'.php';
-		require $file;
+		//require $file;
+		if (file_exists($file)) {
+		    //require "must_have.php";
+		    require $file;
+		}
+		else {
+			return $this->error('not found : '.$this->request->controller);
+		}
 		$controller= new $name($this->request);
 		$controller->Session=new Session();
 		$controller->Form=new Form($controller);

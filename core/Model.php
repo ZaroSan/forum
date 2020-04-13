@@ -94,6 +94,19 @@ class Model{
 		$sql="DELETE FROM {$this->table} WHERE {$this->primaryKey} = {$id}";
 		$this->db->query($sql);
 	}
+	public function toggleOnline($id,$online){
+		$key=$this->primaryKey;
+		if($online == 0){
+			$online=1;
+		}
+		elseif ($online ==1) {
+			# code...
+			$online=0;
+		}
+		$sql='UPDATE '.$this->table.' SET online='.$online.' WHERE '.$key.'='.$id;
+		$pre=$this->db->prepare($sql);
+		$pre->execute();
+	}
 	public function save($data){
 		$key=$this->primaryKey;
 		$fields=array();

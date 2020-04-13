@@ -14,11 +14,13 @@
 		<?php foreach ($posts as $key => $value): ?>
 			<tr>
 				<td><?php echo $value->id; ?></td>
-				<td><span class="btn btn-<?php  echo($value->online==1)?'success':'warning'; ?>"><?php  echo($value->online==1)?'En ligne':'Hors-ligne'; ?></span></td>
+				<td><a href="<?php echo Router::url('admin/post/toggleOnline/'.$value->id); ?>"  class="btn btn-<?php  echo($value->online==1)?'success':'warning'; ?>"><?php  echo($value->online==1)?'En ligne':'Hors-ligne'; ?></a></td>
 				<td><?php echo $value->name; ?></td>
 				<td>
-					<a href="<?php echo Router::url('admin/post/edit/'.$value->id); ?>">Editer</a>
-					<a onclick="return confirm('Voulez-vous vraiment supprimer?')" href="<?php echo Router::url('admin/post/delete/'.$value->id); ?>">Supprimer</a>
+					<div class="btn-group">
+						<a class="btn btn-outline-success" href="<?php echo Router::url('admin/post/edit/'.$value->id); ?>">Editer</a>
+						<a class="btn btn-outline-danger" onclick="return confirm('Voulez-vous vraiment supprimer?')" href="<?php echo Router::url('admin/post/delete/'.$value->id); ?>">Supprimer</a>
+					</div>
 				</td>
 			</tr>
 		<?php endforeach ?>

@@ -92,5 +92,14 @@ class PostController extends Controller{
 		
 		
 	}
+	public function admin_toggleOnline($id){
+		
+		$this->loadModel('Post');
+		$d=$this->Post->findFirst(array(
+			'conditions'=> array(
+				'id'=>$id)));
+		$this->Post->toggleOnline($id,$d->online);
+		$this->redirect('admin/post/index');
+	}
 	
 }
