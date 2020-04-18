@@ -1,3 +1,22 @@
-body{
-    background-color: aqua;
+#myInput {
+  background-image: url('../img/searchicon.png'); /* Add a search icon to input */
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  font-size: 16px; /* Increase font-size */
+  border: 1px solid #ddd; /* Add a grey border */
 }
+.row-hover:hover{
+	background-color: #d6d8d9;
+	transition: 0.3s;
+}
+.row-hover{
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+a{
+	color: black;
+}
+a:hover{
+	color: black;
+}
+

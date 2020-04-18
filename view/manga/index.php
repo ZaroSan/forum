@@ -1,21 +1,16 @@
-<div class="mt-5 alert alert-dark">
-	<h3 class="alert-heading">Les actualités sur les mangas et la japanimation</h3>
-</div>
-<hr>
-<div class="row">
+<div class="row mt-2	">
 	<div class="col-sm-12">
-		<?php foreach ($posts as $key => $value): ?>
+		<?php foreach ($mangas as $key => $value): ?>
 			<div class="row row-hover">
 				<div class="col col-sm-2">
 					<img src="https://dummyimage.com/60x60/fff/000000" class="img-thumbnail rounded float-right">
 				</div>
 				<div class="col col-sm-10">
-					<h5 class="header"><a class="" href="<?php echo Router::url("post/view/id:{$value->id}/slug:{$value->slug}"); ?>"><?php echo $value->name;?></a></h5>
-					<p><?php echo $value->content;?></p>
+					<h5 class="header"><a class="" href="<?php echo Router::url("manga/view/id:{$value->id}/slug:{$value->slug}"); ?>"><?php echo $value->name;?></a></h5>
+					<p><?php echo $value->sumary;?></p>
 				</div>
 				
 			</div>
-			<hr>
 		<?php endforeach ?>
 	</div>
 </div>
@@ -27,4 +22,3 @@
     <?php endfor; ?>    
   </ul>
 </nav>
-

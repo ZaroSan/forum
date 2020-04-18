@@ -8,8 +8,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/b4e22c4cf5.js" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="<?php echo Router::webroot('css/style.css');?>">
     <title><?php echo isset($title_for_layout)? $title_for_layout: ' Mon site '; ?></title>
   </head>
   <body>
@@ -18,7 +19,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav col-9">
             <li class="nav-item active">
               <a class="nav-link" href="<?php echo Router::url('post/index');?>">Actualités <span class="sr-only">(current)</span></a>
             </li>
@@ -29,14 +30,28 @@
 
               </li>
             <?php endforeach; ?>
-            
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo Router::url("manga/index"); ?>" title="mangas"><i class="fas fa-book" style="margin-right: 5px"></i>Mangathèque</a>
+
+            </li>
+
           </ul>
+          <form class="form-inline my-2 my-lg-0 col-3" action="<?php echo Router::url('manga/index'); ?>" method="GET">
+            <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Rechercher" name="search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Rechercher</button>
+          </form>
         </div>
       
     </nav>
-    <div class="container">
-      <?php echo $this->Session->flash();?>
-      <?php echo $content_for_layout;?>
+    <div class="row">
+      <div class="col-md-1" style="background-color: red">
+      </div>
+      <div class="col-sm-10">
+        <?php echo $this->Session->flash();?>
+        <?php echo $content_for_layout;?>
+      </div>
+      <div class="col-md-1" style="background-color: red">
+      </div>
     </div>
 
     <!-- Optional JavaScript -->

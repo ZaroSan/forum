@@ -6,6 +6,7 @@ class Request{
 	public $page =1;
 	public $prefix=false;
 	public $data=false;
+	public $search=false;
 	function __construct(){
 		$this->url=isset($_SERVER['PATH_INFO'])?$_SERVER['PATH_INFO']:'/';
 		if(isset($_GET['page'])){
@@ -16,6 +17,14 @@ class Request{
 				
 			}
 		}
+		if(isset($_GET['search'])){
+			if($_GET['search'] !== ''){
+				$this->search=$_GET['search'];
+			}
+			else{
+				$this->search=false;
+			}
+		}
 		if(!empty($_POST)){
 			$this->data=new stdClass();
 			foreach ($_POST as $key => $value) {
@@ -23,6 +32,7 @@ class Request{
 				$this->data->$key=$value;
 			}
 		}
+
 	}
 
 }

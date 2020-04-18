@@ -48,14 +48,17 @@ class Model{
 			}
 			else{
 				$sql .=$req['fields'];
+
 			}
 		}
 		else{
 			$sql .=' * ';
 		}
 		$sql .=' FROM '.$this->table.' as '.get_class($this).' ';
+		$c=false;
 		if(isset($req['conditions'])){
 			$sql .= 'WHERE ';
+			$c=true;
 			if(!is_array($req['conditions'])){
 				$sql .= $req['conditions'];
 			}
@@ -70,10 +73,32 @@ class Model{
 				$sql .= implode(' AND ', $cond);
 			}
 		}
+		if(isset($req['like'])){
+			if(!$c)
+				$sql .= ' WHERE ';
+			else
+				$sql .= ' AND ';
+			if(!is_array($req['like'])){
+				$sql .= $req['like'];
+			}
+			else{
+				$cond= array();
+				foreach ($req['like'] as $key => $value) {
+					if(!is_numeric($value)){
+						$value='"%'.$value.'%"';
+					}
+					$cond[]="$key like $value";
+				}
+				$sql .= implode(' AND ', $cond);
+			}
+
+		}
+		if(isset($req['sort'])){
+			$sql .=' ORDER BY '.$req['sort'];
+		}
 		if(isset($req['limit'])){
 			$sql .=' LIMIT '.$req['limit'];
-		}
-
+		}	
 		$pre=$this->db->prepare($sql);
 		$pre->execute();
 
@@ -82,10 +107,11 @@ class Model{
 	public function findFirst($req){
 		return current($this->find($req));
 	}
-	public function findCount($req){
+	public function findCount($req,$like=null){
 		$res =$this->findFirst(array(
 			'fields' => 'COUNT('.$this->primaryKey.') as count',
-			'conditions' =>$req
+			'conditions' =>$req,
+			'like'=>$like
 		));
 		return $res->count;
 		

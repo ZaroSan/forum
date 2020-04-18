@@ -2,7 +2,8 @@
 <div class="page-heard">
 	<h1><?php echo $total; ?> Pages</h1>
 </div>
-<table class="table ">
+<input type="text" id="myInput" onkeyup="myFunction(2)" placeholder="Rechercher par titre ..." class="col-sm-12">
+<table class="table table-hover table-sm" id="myTable">
 	<thead class="thead-dark">
 		<tr>
 			<th scope="col">ID</th>

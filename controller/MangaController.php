@@ -1,7 +1,7 @@
 <?php
 class MangaController extends Controller{
 	public function admin_index(){
-		$perPage=10;
+		$perPage=50;
 		$this->loadModel('Book');
 		$conditions=array(
 				'support'=>'manga');
@@ -57,6 +57,44 @@ class MangaController extends Controller{
 				'id'=>$id)));
 		$this->Book->toggleOnline($id,$d->online);
 		$this->redirect('admin/manga/index');
+	}
+	public function view($id){
+		$this->loadModel('Book');
+		$d['manga']=$this->Book->findFirst(array(
+			'conditions'=> array(
+				'id'=>$id)));
+		$this->set($d);
+	}
+
+	public function index(){
+		$perPage=50;
+		$this->loadModel('Book');
+
+		$conditions=array(
+				'support'=>'manga',
+				'online'=> 1);
+		if($this->request->search){
+			$like=array(
+				'name'=>$this->request->search);
+			$d['mangas']=$this->Book->find(array(
+				'fields'=>'id,name,online,slug,sumary',
+				'conditions'=> $conditions,
+				'like'=>$like,
+				'sort'=>'created desc',
+				'limit' => ($perPage*($this->request->page-1)).','.$perPage));
+			$d['total']=$this->Book->findCount($conditions,$like);
+		}
+		else{
+			$d['mangas']=$this->Book->find(array(
+			'fields'=>'id,name,online,slug,sumary',
+			'conditions'=> $conditions,
+			'sort'=>'created desc',
+			'limit' => ($perPage*($this->request->page-1)).','.$perPage));
+			$d['total']=$this->Book->findCount($conditions);
+		}
+		
+		$d['page']=ceil($d['total']/$perPage);
+		$this->set($d);
 	}
 }
 ?>
