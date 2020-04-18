@@ -2,6 +2,7 @@
 	<h3 class="alert-heading">Les actualités sur les mangas et la japanimation</h3>
 </div>
 <hr>
+Ici j ai modifié pour red
 <div class="row">
 	<div class="col-sm-12">
 		<?php foreach ($posts as $key => $value): ?>
