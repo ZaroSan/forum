@@ -2,7 +2,7 @@
 	<h1>Editer un manga</h1>
 </div>
 
-<form action="<?php echo Router::url('admin/manga/edit/'.$id); ?>" method="post">
+<form action="javascript:void(0)" method="post" id="formulaireAjout" onsubmit="ajouter()">
 	<?php echo $this->Form->input('id','hidden'); ?>
 	<?php echo $this->Form->input('name','Titre',array('class'=>'col-sm-8')); ?>
 	<?php echo $this->Form->input('slug','Url',array('class'=>'col-sm-8')); ?>

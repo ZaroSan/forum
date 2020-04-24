@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="<?php echo Router::webroot('css/style.css');?>"> 
+    <link rel="stylesheet" type="text/css" href="<?php echo Router::webroot('css/style.css');?>">
     <title><?php echo isset($title_for_layout)? $title_for_layout: ' Admin '; ?></title>
   </head>
   <body>
@@ -32,6 +32,9 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo Router::url('admin/anime/index');?>">Animés</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo Router::url('admin/support/index');?>">Supports</a>
+          </li>
            <li class="nav-item active ">
             <a class="nav-link " href="<?php echo Router::url('/');?>">Voir le site</a>
           </li>
@@ -50,5 +53,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script type="text/javascript" src="<?php echo Router::webroot('js/sortTable.js');?>"></script>
     <script type="text/javascript" src="<?php echo Router::webroot('js/searchTable.js');?>"></script>
+    <script type="text/javascript" src="<?php echo Router::webroot('ajax/editManga.js');?>"></script>
   </body>
 </html>

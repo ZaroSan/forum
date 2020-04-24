@@ -15,14 +15,15 @@ class MangaController extends Controller{
 	}
 	public function admin_edit($id=null){
 		$this->loadModel('Book');
+		//debug($this->request);
 		$d['id']='';
 		if($this->request->data){
 			if($this->Book->validates($this->request->data)){
 
 				$this->request->data->support='manga';
 				$this->request->data->created=date('Y-m-d h:i:s');
-				debug($this->request->data);
-				
+				//debug($this->request->data);
+				//die();
 				$this->Book->save($this->request->data);
 				$this->Session->setFlash('le contenu a bien été modifié','success');
 
@@ -49,6 +50,7 @@ class MangaController extends Controller{
 		
 		$this->redirect('admin/manga/index');
 	}
+
 	public function admin_toggleOnline($id){
 		
 		$this->loadModel('Book');

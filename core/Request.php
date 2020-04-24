@@ -31,6 +31,7 @@ class Request{
 				# code...
 				$this->data->$key=$value;
 			}
+			debug($this->data);
 		}
 
 	}
