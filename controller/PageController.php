@@ -76,7 +76,12 @@ class PageController extends Controller{
 				$d['id']=$id;
 			}
 		}
-		
+		$this->loadModel('Support');
+		$conditions=array(
+				'type'=>'post');
+		$d['select']=$this->Support->find(array(
+			'fields'=>'name',
+			'conditions'=> $conditions));
 		$this->set($d);
 	}
 	function admin_delete($id){

@@ -18,6 +18,7 @@ class Dispatcher{
 		}
 		call_user_func_array(array($controller,$action), $this->request->params);
 		$controller->render($action);
+		//debug($this);
 	}
 
 	function loadController(){

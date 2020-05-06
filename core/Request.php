@@ -25,13 +25,29 @@ class Request{
 				$this->search=false;
 			}
 		}
+		if(isset($_GET['controller'])){
+			if($_GET['controller'] !== ''){
+				$this->controller=$_GET['controller'];
+			}
+			else{
+				$this->controller=false;
+			}
+		}
+		if(isset($_GET['action'])){
+			if($_GET['action'] !== ''){
+				$this->action=$_GET['action'];
+			}
+			else{
+				$this->action=false;
+			}
+		}
 		if(!empty($_POST)){
 			$this->data=new stdClass();
 			foreach ($_POST as $key => $value) {
 				# code...
 				$this->data->$key=$value;
 			}
-			debug($this->data);
+			//debug($this->data);
 		}
 
 	}

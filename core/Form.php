@@ -5,7 +5,7 @@ class Form{
 	public function __construct($controller){
 		$this->controller=$controller;
 	}
-	public function input($name,$label,$options=array()){
+	public function input($name,$label,$options=array(),$required=false){
 		$error=false;
 		$classError='';
 		if(isset($this->errors[$name])){
@@ -30,6 +30,9 @@ class Form{
 			}
 
 			
+		}
+		if($required){
+			$attr .=" required";
 		}
 		if(!isset($options['type'])){
 			$html.='<input '.$attr.' type="text" name="'.$name.'" id="input'.$name.'" value="'.$value.'">';

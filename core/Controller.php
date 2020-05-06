@@ -52,6 +52,14 @@ class Controller {
 		}
 		
 	}
+	public function ePrivate($message=null){
+		$d['message']="Ce contenu n'est actuelllement pas disponible";
+		$d['search']=$message;
+		$this->set($d);
+
+		$this->render('/errors/private');
+		die();
+	}
 	public function e404($message){
 		header("HTTP/1.0 404 Not Found");
 		$this->set('message',$message);

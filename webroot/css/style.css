@@ -16,10 +16,9 @@
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
-a{
-	color: black;
+.manga-link{
+  color:black;
 }
-a:hover{
-	color: black;
+.manga-link:hover{
+  color:black;
 }
-

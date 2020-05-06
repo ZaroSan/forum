@@ -13,17 +13,22 @@ class MangaController extends Controller{
 		$d['page']=ceil($d['total']/$perPage);
 		$this->set($d);
 	}
+	public function admin_editAjax($id=null){
+		
+		$this->loadModel('Book');
+		
+		$this->request->data->support='manga';
+		$this->request->data->created=date('Y-m-d h:i:s');
+		$this->Book->save($this->request->data);
+	}
 	public function admin_edit($id=null){
 		$this->loadModel('Book');
-		//debug($this->request);
 		$d['id']='';
 		if($this->request->data){
 			if($this->Book->validates($this->request->data)){
 
 				$this->request->data->support='manga';
 				$this->request->data->created=date('Y-m-d h:i:s');
-				//debug($this->request->data);
-				//die();
 				$this->Book->save($this->request->data);
 				$this->Session->setFlash('le contenu a bien été modifié','success');
 
@@ -50,6 +55,23 @@ class MangaController extends Controller{
 		
 		$this->redirect('admin/manga/index');
 	}
+	public function admin_deleteAjax(){
+		$this->loadModel('Book');
+		$this->Book->delete($this->request->data->id);
+	}
+
+	public function admin_indexAjax(){
+		$perPage=50;
+		$this->loadModel('Book');
+		$conditions=array(
+				'support'=>'manga');
+		$d['list']=$this->Book->find(array(
+			'fields'=>'id,name,online,slug',
+			'conditions'=> $conditions));
+		$d['total']=$this->Book->findCount($conditions);
+		$d['page']=ceil($d['total']/$perPage);
+		echo json_encode($d);
+	}
 
 	public function admin_toggleOnline($id){
 		
@@ -58,13 +80,27 @@ class MangaController extends Controller{
 			'conditions'=> array(
 				'id'=>$id)));
 		$this->Book->toggleOnline($id,$d->online);
+	}
+	public function admin_toggleOnlineAjax(){
+		
+		$this->loadModel('Book');
+		$d=$this->Book->findFirst(array(
+			'conditions'=> array(
+				'id'=>$this->request->data->id)));
+		$this->Book->toggleOnline($this->request->data->id,$d->online);
 		$this->redirect('admin/manga/index');
 	}
 	public function view($id){
+
 		$this->loadModel('Book');
 		$d['manga']=$this->Book->findFirst(array(
 			'conditions'=> array(
-				'id'=>$id)));
+				'id'=>$id,
+				'online'=>1)));
+		
+		if(!isset($d['manga']->id)){
+			$this->ePrivate($this->request->params);
+		}
 		$this->set($d);
 	}
 
@@ -82,7 +118,7 @@ class MangaController extends Controller{
 				'fields'=>'id,name,online,slug,sumary',
 				'conditions'=> $conditions,
 				'like'=>$like,
-				'sort'=>'created desc',
+				'sort'=>'name asc',
 				'limit' => ($perPage*($this->request->page-1)).','.$perPage));
 			$d['total']=$this->Book->findCount($conditions,$like);
 		}
@@ -90,7 +126,7 @@ class MangaController extends Controller{
 			$d['mangas']=$this->Book->find(array(
 			'fields'=>'id,name,online,slug,sumary',
 			'conditions'=> $conditions,
-			'sort'=>'created desc',
+			'sort'=>'name asc',
 			'limit' => ($perPage*($this->request->page-1)).','.$perPage));
 			$d['total']=$this->Book->findCount($conditions);
 		}

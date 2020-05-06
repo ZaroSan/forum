@@ -20,28 +20,15 @@
 			<th scope="col">Actions</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody id="liste">
 
-		<?php foreach ($mangas as $key => $value): ?>
-			<tr>
-				<td><?php echo $value->id; ?></td>
-				<td><a href="<?php echo Router::url('admin/manga/toggleOnline/'.$value->id); ?>" class="btn btn-<?php  echo($value->online==1)?'success':'warning'; ?>"><?php  echo($value->online==1)?'En ligne':'Hors-ligne'; ?></a></td>
-				<td><?php echo $value->name; ?></td>
-				<td><?php echo $value->slug; ?></td>
-				<td>
-					<div class="btn-group">
-						<a class="btn btn-outline-success" href="<?php echo Router::url('admin/manga/edit/'.$value->id); ?>">Editer</a>
-						<a class="btn btn-outline-danger" onclick="return confirm('Voulez-vous vraiment supprimer?')" href="<?php echo Router::url('admin/manga/delete/'.$value->id); ?>">Supprimer</a>
-					</div>
-				</td>
-			</tr>
-		<?php endforeach ?>
+		
 	</tbody>
 </table>
 <div class="row mb-2">
 	<a class="btn btn-primary" href="<?php echo Router::url('admin/manga/edit');?>">Ajouter</a>
 </div>
-<div class="row">
+<!--<div class="row">
 	<nav aria-label="Page navigation example">
 	  <ul class="pagination">
 	  	<?php for($i=1; $i<=$page;$i++): ?>
@@ -49,4 +36,5 @@
 	    <?php endfor; ?>    
 	  </ul>
 	</nav>
-</div>
+</div>-->
+<script type="text/javascript" src="<?php echo Router::webroot('ajax/mangaAjax.js');?>"></script>
