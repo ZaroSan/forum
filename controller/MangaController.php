@@ -64,12 +64,30 @@ class MangaController extends Controller{
 		$perPage=50;
 		$this->loadModel('Book');
 		$conditions=array(
-				'support'=>'manga');
-		$d['list']=$this->Book->find(array(
-			'fields'=>'id,name,online,slug',
-			'conditions'=> $conditions));
+				'support'=>'manga',
+				'online'=> 1);
+		if($this->request->search){
+			$like=array(
+				'name'=>$this->request->search);
+			$d['list']=$this->Book->find(array(
+				'fields'=>'id,name,online,slug,sumary',
+				'conditions'=> $conditions,
+				'like'=>$like,
+				'sort'=>'id asc',
+				'limit' => ($perPage*($this->request->page-1)).','.$perPage));
+			
+		}
+		else{
+			$d['list']=$this->Book->find(array(
+			'fields'=>'id,name,online,slug,sumary',
+			'conditions'=> $conditions,
+			'sort'=>'id asc',
+			'limit' => ($perPage*($this->request->page-1)).','.$perPage));
+			
+		}
 		$d['total']=$this->Book->findCount($conditions);
 		$d['page']=ceil($d['total']/$perPage);
+		$d['activePage']=$this->request->page;
 		echo json_encode($d);
 	}
 
@@ -132,7 +150,39 @@ class MangaController extends Controller{
 		}
 		
 		$d['page']=ceil($d['total']/$perPage);
+		$d['activePage']=$this->request->page;
 		$this->set($d);
+	}
+	public function indexAjax(){
+		$perPage=5;
+		$this->loadModel('Book');
+
+		$conditions=array(
+				'support'=>'manga',
+				'online'=> 1);
+		if($this->request->search){
+			$like=array(
+				'name'=>$this->request->search);
+			$d['mangas']=$this->Book->find(array(
+				'fields'=>'id,name,online,slug,sumary',
+				'conditions'=> $conditions,
+				'like'=>$like,
+				'sort'=>'name asc',
+				'limit' => ($perPage*($this->request->page-1)).','.$perPage));
+			$d['total']=$this->Book->findCount($conditions,$like);
+		}
+		else{
+			$d['mangas']=$this->Book->find(array(
+			'fields'=>'id,name,online,slug,sumary',
+			'conditions'=> $conditions,
+			'sort'=>'name asc',
+			'limit' => ($perPage*($this->request->page-1)).','.$perPage));
+			$d['total']=$this->Book->findCount($conditions);
+		}
+		$d['search']=$this->request->search;
+		$d['page']=ceil($d['total']/$perPage);
+		$d['activePage']=$this->request->page;
+		echo json_encode($d);
 	}
 }
 ?>

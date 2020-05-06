@@ -6,7 +6,7 @@
 		<a class="btn btn-primary" href="<?php echo Router::url('admin/manga/edit');?>">Ajouter</a>
 	</div>
 	<div class="col-sm-11">
-		<input type="text" id="myInput" onkeyup="myFunction(2)" placeholder="Rechercher par titre ..." class="col-sm-12">
+		<input type="text" id="myInput" onkeyup="reloadListAdmin()" placeholder="Rechercher par titre ..." class="col-sm-12">
 	</div>
 </div>
 
@@ -28,13 +28,15 @@
 <div class="row mb-2">
 	<a class="btn btn-primary" href="<?php echo Router::url('admin/manga/edit');?>">Ajouter</a>
 </div>
-<!--<div class="row">
+<div class="row" >
 	<nav aria-label="Page navigation example">
-	  <ul class="pagination">
-	  	<?php for($i=1; $i<=$page;$i++): ?>
-	    <li class="page-item  <?php if($i==$this->request->page) echo 'active'; ?>"><a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-	    <?php endfor; ?>    
-	  </ul>
+	<div id="pagination">
+	</div>
 	</nav>
-</div>-->
+</div>
 <script type="text/javascript" src="<?php echo Router::webroot('ajax/mangaAjax.js');?>"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		reloadListAdmin();
+	}
+</script>
