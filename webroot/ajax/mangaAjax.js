@@ -12,9 +12,12 @@ function reloadListAdmin(page){
 	fetch(url)
 	.then(r => r.json())
 	.then(r => {
+		document.getElementById('total').innerText=r.total + ' Mangas';
 		if (r.list.length > 0) {
 			liste.innerHTML = '';
+
 			for (let data of r.list) {
+
 				const ligne = liste.insertRow();
 				ligne.dataset.id = data.id;
 				ligne.insertCell().innerText = data.id;
@@ -152,6 +155,6 @@ function toggleOnline(id){
 		fetch('/forum/indexAjax.php?controller=Manga&action=admin_toggleOnlineAjax', {
 			method: 'POST',							  
 			body: donnees
-		}).then(() =>reloadList() );
+		}).then(() =>reloadListAdmin() );
 	}
 }

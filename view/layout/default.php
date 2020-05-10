@@ -33,10 +33,20 @@
               <a class="nav-link" href="<?php echo Router::url("manga/index"); ?>" title="mangas"><i class="fas fa-book" style="margin-right: 5px"></i>Mangathèque</a>
 
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo Router::url("gender/index"); ?>" title="genres"><i class="fas fa-venus-mars" style="margin-right: 5px"></i>Les genres</a>
 
+            </li>
           </ul>
+
+
           
         </div>
+         <div class="float-right">
+            <a  href="<?php echo Router::url("user/login"); ?>" title="Se connecter">
+              <i class="fas fa-sign-in-alt" style="color:gray"></i>
+            </a>
+          </div>
       
     </nav>
     <div class="row">

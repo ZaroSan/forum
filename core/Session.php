@@ -25,6 +25,22 @@ class Session
 			return $html;
 		}
 	}
+	public function write($key,$value){
+		$_SESSION[$key]=$value;
+	}
+	public function read($key){
+		if($key){
+			if(isset($_SESSION[$key])){
+				return $_SESSION[$key];
+			}
+			else{
+				return false;
+			}
+		}
+	}
+	public function isLogged(){
+		return isset($_SESSION['User']->id);
+	}
 }
 
 ?>

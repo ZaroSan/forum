@@ -26,6 +26,12 @@ class MangaController extends Controller{
 		$d['id']='';
 		if($this->request->data){
 			if($this->Book->validates($this->request->data)){
+				if(isset($id)){
+					$new=false;
+				}
+				else{
+					$new=true;
+				}
 
 				$this->request->data->support='manga';
 				$this->request->data->created=date('Y-m-d h:i:s');
@@ -33,7 +39,8 @@ class MangaController extends Controller{
 				$this->Session->setFlash('le contenu a bien été modifié','success');
 
 				$id=$this->Book->id;
-				$this->redirect('admin/manga/index');
+				if($new)
+					$this->redirect('admin/manga/index');
 			}
 			else{
 				$this->Session->setFlash('Informations invalides','danger');
@@ -64,8 +71,7 @@ class MangaController extends Controller{
 		$perPage=50;
 		$this->loadModel('Book');
 		$conditions=array(
-				'support'=>'manga',
-				'online'=> 1);
+				'support'=>'manga');
 		if($this->request->search){
 			$like=array(
 				'name'=>$this->request->search);

@@ -8,5 +8,6 @@ function post(controller,action) {
 	.then(r => {})
 	.catch(e => {});
 	formulaireAjout.reset();
+	
 }
 

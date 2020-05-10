@@ -33,14 +33,12 @@ class Dispatcher{
 			return $this->error('not found : '.$this->request->controller);
 		}
 		$controller= new $name($this->request);
-		$controller->Session=new Session();
-		$controller->Form=new Form($controller);
+		
 		return $controller;
 	}
 
 	function error($message){
 		$controller=new Controller($this->request);
-		$controller->Session=new Session();
 		$controller->e404($message);
 
 	}

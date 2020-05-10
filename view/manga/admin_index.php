@@ -1,5 +1,5 @@
 <div class="page-heard">
-	<h1><?php echo $total; ?> Mangas</h1>
+	<h1 id='total'><?php echo $total; ?> Mangas</h1>
 </div>
 <div class="row">
 	<div class="col-sm-1 mt-2">

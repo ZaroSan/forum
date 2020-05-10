@@ -9,6 +9,8 @@ class Controller {
 	private $rendered = false;
 
 	function __construct($request = null){
+		$this->Session=new Session();
+		$this->Form=new Form($this);
 		if($request){
 			$this->request=$request;
 			require ROOT.DS.'config'.DS.'hook.php';

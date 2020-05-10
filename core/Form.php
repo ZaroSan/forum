@@ -11,7 +11,6 @@ class Form{
 		if(isset($this->errors[$name])){
 			$error=$this->errors[$name];
 		}
-		//debug($this->errors);
 		if(!isset($this->controller->request->data->$name)){
 			$value='';
 		}
@@ -21,7 +20,7 @@ class Form{
 		if($label=='hidden'){
 			return '<input  type="hidden" name="'.$name.'" id="input'.$name.'" value="'.$value.'">';
 		}
-		$html= '<div class="form-group row"><label for="input"'.$name.'" class="col-sm-2 col-form-label text-right">'.$label.'</label><div class="col-sm-10">';
+		$html= '<div class="form-group row"><label for="input'.$name.'" class="col-sm-3 col-form-label text-right">'.$label.'</label><div class="col-sm-9">';
 		$attr=' ';
 		foreach ($options as $key => $v) {
 			# code...
@@ -48,6 +47,9 @@ class Form{
 		}
 		elseif($options['type']=='date'){
 			$html.='<input '.$attr.' type="date" name="'.$name.'"  id="input'.$name.'" value="'.$value.'">';
+		}
+		elseif($options['type']=='password'){
+			$html.='<input '.$attr.' type="password" name="'.$name.'"  id="input'.$name.'" value="'.$value.'">';
 		}
 		elseif ($options['type']=='select') {
 			$html.='<select id="input'.$name.'" name="'.$name.'"><option value="" selected disabled hidden>...</option>';
