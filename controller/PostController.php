@@ -17,6 +17,10 @@ class PostController extends Controller{
 			'limit' => ($perPage*($this->request->page-1)).','.$perPage));
 		$d['total']=$this->Post->findCount($conditions);
 		$d['page']=ceil($d['total']/$perPage);
+		foreach ($d['posts'] as $key) {
+			# code...
+			$key->content=substr($key->content, 0,250).' ...';
+		}
 		$this->set($d);
 
 

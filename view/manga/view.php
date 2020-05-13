@@ -10,7 +10,7 @@
 			<li class="list-group-item list-group-item-dark"><strong class="mr-1">Résumé :</strong><?php echo($manga->sumary);?></li>
 			<li class="list-group-item list-group-item-dark"><strong class="mr-1">Editeur :</strong><?php echo($manga->edit);?></li>
 			<li class="list-group-item list-group-item-dark"><strong class="mr-1">Nombre de tomes :</strong><?php echo($manga->number);?></li>
-			<li class="list-group-item list-group-item-dark"><strong class="mr-1">Catégorie :</strong></li>
+			<li class="list-group-item list-group-item-dark"><strong class="mr-1">Catégorie :</strong><?php echo isset($manga->category->name)?$manga->category->name:'[NONE]';?></li>
 			<li class="list-group-item list-group-item-dark"><strong class="mr-1">Année :</strong></li>
 			<li class="list-group-item list-group-item-dark"><strong class="mr-1">Genre :</strong></li>
 			<li class="list-group-item list-group-item-dark"><strong class="mr-1">Public :</strong></li>

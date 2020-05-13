@@ -13,6 +13,24 @@
 	
 	<?php echo $this->Form->input('online','En ligne',array('type'=>'checkbox')); ?>
 	<?php echo $this->Form->input('current','Fini',array('type'=>'checkbox')); ?>
+	<div class="form-group row">
+		<label for="inputCategory" class="col-sm-3 col-form-label text-right">
+			Categorie
+		</label>
+		<div class="col-sm-9">
+			<select id="inputCategory" name="category">
+				<option value="" selected disabled hidden>...</option>
+				<?php foreach ($categories as  $value) {
+					# code...
+					echo '<option value="'.$value->id.'"';
+					if($value->id == $data->category){
+						echo 'selected="selected"';
+					}
+					echo '>'.$value->name.'</option>';
+				}?>
+			</select>
+		</div>
+	</div>
 	<div class="actions">
 		<input type="submit" class="btn btn-primary" value="Envoyer">
 	</div>

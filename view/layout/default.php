@@ -50,13 +50,13 @@
       
     </nav>
     <div class="row">
-      <div class="col-md-1" style="background-color: red">
+      <div class="col-md-1" >
       </div>
       <div class="col-sm-10">
         <?php echo $this->Session->flash();?>
         <?php echo $content_for_layout;?>
       </div>
-      <div class="col-md-1" style="background-color: red">
+      <div class="col-md-1" >
       </div>
     </div>
 

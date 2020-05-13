@@ -10,6 +10,7 @@ class Conf{
 			'password'=>'password'
 		)
 	);
+	
 	static $admin='cockpit';
 
 }

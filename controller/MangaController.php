@@ -25,6 +25,7 @@ class MangaController extends Controller{
 		$this->loadModel('Book');
 		$d['id']='';
 		if($this->request->data){
+
 			if($this->Book->validates($this->request->data)){
 				if(isset($id)){
 					$new=false;
@@ -53,7 +54,10 @@ class MangaController extends Controller{
 				$d['id']=$id;
 			}
 		}
-		
+		$d['data']=$this->request->data;
+		$this->loadModel('Category');
+		$d['categories']=$this->Category->find(array(
+			'sort'=>'name asc'));
 		$this->set($d);
 	}
 	public function admin_delete($id){
@@ -125,6 +129,12 @@ class MangaController extends Controller{
 		if(!isset($d['manga']->id)){
 			$this->ePrivate($this->request->params);
 		}
+		$this->loadModel('Category');
+		$d['manga']->category=$this->Category->findFirst(array(
+			'fields'=>'name',
+			'conditions'=> array(
+				'id'=>$d['manga']->category)));
+		
 		$this->set($d);
 	}
 
@@ -184,6 +194,11 @@ class MangaController extends Controller{
 			'sort'=>'name asc',
 			'limit' => ($perPage*($this->request->page-1)).','.$perPage));
 			$d['total']=$this->Book->findCount($conditions);
+		}
+		foreach ($d['mangas'] as $key) {
+			# code...
+			$key->sumary=substr($key->sumary, 0,250).'...';
+
 		}
 		$d['search']=$this->request->search;
 		$d['page']=ceil($d['total']/$perPage);

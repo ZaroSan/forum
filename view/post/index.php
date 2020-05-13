@@ -10,7 +10,7 @@
 					<img src="https://dummyimage.com/60x60/fff/000000" class="img-thumbnail rounded float-right">
 				</div>
 				<div class="col col-sm-10">
-					<h5 class="header"><a class="" href="<?php echo Router::url("post/view/id:{$value->id}/slug:{$value->slug}"); ?>"><?php echo $value->name;?></a></h5>
+					<h5 class="header"><a class="" style="color:black" href="<?php echo Router::url("post/view/id:{$value->id}/slug:{$value->slug}"); ?>"><?php echo $value->name;?></a></h5>
 					<p><?php echo $value->content;?></p>
 				</div>
 				
